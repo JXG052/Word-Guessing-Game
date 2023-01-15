@@ -9,7 +9,7 @@
 
 ## Pseudo
 
-1. Create Save Game Button
+1. Create Start Game Button
     * event listener that triggers a new word
 1. Create function that generates a random word
     * output changes to new word and blanks

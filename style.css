@@ -73,6 +73,7 @@ body {
 #newGameBtn:hover {
     color: white;
     background-color: black;
+    transition: 0.2sgit;
 }
 
 #message {
