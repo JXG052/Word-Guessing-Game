@@ -8,6 +8,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="box" id="titleContainer">
+        <h1 class="title">WORD GUESSING GAME</h1>
+    </div>
+
+
+    <!-- Top row data and information about the game -->
+    <div class="toprow">
+        
+        <!-- Box displaying how many games youve won -->
+        <div class="box" id="outputBox">
+            <p class="outputText" id="gamesPlayed">Games Played: </p>
+            <p class="outputText" id="winCount">You have won: </p>
+            <p class="outputText" id="loseCout">The computer has won: </p>
+            <p class="outputText" id="guessesRemaining">3 guesses left</p>
+            <p class="outputText" id="countdown">60 seconds left</p>
+            <p class="outputText" id="lettersGuessedLabel"> Letters Guessed: </p>
+            <p class="outputText" id="lettersGuessed">A, C,  F</p>
+        </div>
+        
+        <div id="gameBox">
+            <!-- Thw word trying to be guessed -->
+            <div class="box" id="wordBox">
+                <p class="outputText" id = theWord> _ _ _ _ _ </p>
+            </div>
+                
+            <!-- Message Screen and new Game -->
+            <div class="box" id="buttonBox">
+
+                <button id="newGameBtn">New Game</button>
+            </div>
+        </div>    
+
+    </div>
 
 
 
