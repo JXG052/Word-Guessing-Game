@@ -1,0 +1,85 @@
+/* Global Styling */
+body {
+    height: 100vh;
+    background: url(images/background.jpg) no-repeat center center/cover;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    
+} 
+
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+    border: 3pt solid white;
+    box-shadow: 0 0 3px;
+    
+}
+#titleContainer{
+    background-color: transparent;
+    display: flex;
+    flex-direction: flex-start;
+    
+}
+.toprow {
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+#outputBox {
+    flex: 1;
+    background-color: transparent;
+    color: white;
+    border: 3pt solid white;
+    padding: 5px;
+    box-shadow: 0 0 3px;
+}
+
+#gameBox {
+    flex: 5;
+}
+
+#wordBox {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    border: 3pt solid white;
+    border-radius: 5px;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 3px;
+}
+.box {
+    margin: 15px;
+}
+
+#buttonBox {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+#newGameBtn {
+    border-radius: 15px;
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 3px;
+}
+#newGameBtn:hover {
+    color: white;
+    background-color: black;
+}
+
+#message {
+    color: white;
+    font-size: 2rem;
+}
+
+
+
+

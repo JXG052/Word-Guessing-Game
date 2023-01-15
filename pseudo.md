@@ -43,10 +43,11 @@ HTML and Basic CSS to look something like the following:
 
 | Variable          | Type          | code          | explanation                           |
 | ------------      | -----         | ------------  | -------------                         |
+| gamesPlayed       | number        | init to 0     | Games played tally                    |
 | winCount          | number        | init to 0     | Games won tally                       |
 | lossCount         | number        | init to 0     | Games Lost tally
 | numberOfGuesses   | number        |               | Number of guesses the user has left   |
-| word              | string        |               | Word to be guessed                    |
+| theWord              | string        |               | Word to be guessed                    |
 | lettersinWord     | array         | word.split()  | Each Letter in the word               |
 | matches           | number        |               | Number of matches user has found      |
 | getWord()         | function      |               | returns a random word                 |
