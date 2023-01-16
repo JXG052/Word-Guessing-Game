@@ -9,11 +9,13 @@
 
 ## Pseudo
 
-1. Create Save Game Button
+1. Create Start Game Button
     * event listener that triggers a new word
 1. Create function that generates a random word
-    * output changes to new word and blanks
+    * use length of that word to print that many blanks as a string
+    * output changes to new word and blanks. Function - change to blanks 
 1. if user input (key stroke event?)
+    * how does user input key? keydown 
     * if correct letter, fill out blanks
         
     * else, numberOfGuesses -1
@@ -67,4 +69,7 @@ HTML and Basic CSS to look something like the following:
 * blanks or letters depending on where we are up to in the game
 * win count
 * loss count
-    
+
+## Functions
+
+
