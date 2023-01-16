@@ -37,6 +37,7 @@ let lettersGuessed = [];
 
 // events
 newGameBtn.addEventListener("click", function (){
+    window.focus();
     liveGame = true;
     // generate random word
     let word = generateRandomWord()
