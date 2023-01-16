@@ -61,6 +61,7 @@ let cluesRemaining = 3;
 let clue;
 // events
 newGameBtn.addEventListener("click", function (){
+    prompt();
     liveGame = true;
     stopBtn.style.display = "inline";
     newGameBtn.style.display = "none";
