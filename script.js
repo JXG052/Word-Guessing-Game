@@ -23,6 +23,7 @@ const loseCountEl = document.querySelector('#loseCount');
 const guessesRemainingEl = document.querySelector('#guessesRemaining');
 const countdownEl = document.querySelector('#countdown');
 const lettersGuessedEl = document.querySelector('#lettersGuessed');
+const theWord = document.querySelector('#theWord');
 
 // Variables that will change
 
@@ -33,8 +34,7 @@ let numberOfGuesses = 5;
 
 // events
 newGameBtn.addEventListener("click", function (){
-    
-    console.log(generateRandomWord())
+    theWord.textContent = generateRandomWord()
 })
 
 // Returns a random word
