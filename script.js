@@ -1,17 +1,17 @@
 let  wordsArray = [
-    "HELLO",
-    "BURGER",
-    "WELCOME",
-    "PHOTOSYNTEHSIS", 
-    "FOOTBALL", 
-    "RELIGION", 
+    // "HELLO",
+    // "BURGER",
+    // "WELCOME",
+    // "PHOTOSYNTEHSIS", 
+    // "FOOTBALL", 
+    // "RELIGION", 
     "TRUCK", 
-    "AMERICA", 
+    // "AMERICA", 
     "MOVIE",
     "POLICE",
-    "CUPBOARD",
-    "GARAGE",
-    "BOTTLE",
+    // "CUPBOARD",
+    // "GARAGE",
+    // "BOTTLE",
 ]
 
 // DOM variables
@@ -25,6 +25,7 @@ const countdownEl = document.querySelector('#countdown');
 const lettersGuessedEl = document.querySelector('#lettersGuessed');
 const theWordEl = document.querySelector('#theWord');
 const messageEl = document.querySelector("#message")
+const messageBoxEl = document.querySelector("#messageBox")
 
 
 // Variables that will change
@@ -38,14 +39,15 @@ let blanks = [];
 let lettersGuessed = [];
 let countdown = 60;
 let intervalID = null
+let matches = 0;
 
 // events
 newGameBtn.addEventListener("click", function (){
     liveGame = true;
-    messageEl.style.color = "red"
+    messageBoxEl.style.backgroundColor = "Yellow"
 
     // start timer
-    intervalID = window.setInterval(timer, 100)
+    intervalID = window.setInterval(timer, 1000)
 
     // generate random word
     let word = generateRandomWord()
@@ -100,7 +102,11 @@ const checkWord = function (letter) {
         guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
         lettersGuessed.push(letter);
         lettersGuessedEl.textContent = lettersGuessed
-
+        if (numberOfGuesses === 0){
+            lossCount ++
+            messageEl.textContent  ="you ran out of guesses"
+            stopGame()
+        }
     }
     else{
 
@@ -108,6 +114,12 @@ const checkWord = function (letter) {
         let index = theWord.indexOf(letter);
         blanks[index] = letter;
         theWordEl.textContent = blanks.join(" ")
+        matches ++;
+        console.log(matches)
+        if (matches === theWord.length){
+            stopGame()
+            youWin()
+        }
     }
 }
 
@@ -116,20 +128,43 @@ const checkWord = function (letter) {
 
 const timer = function () {
     if (countdown <= 0) {
-        clearInterval(intervalID)
+        messageBoxEl.style.backgroundColor = "red"
+        messageEl.textContent = "TIME UP!"
+        lossCount--
         stopGame()
     } else {
     countdown --
     countdownEl.textContent = `${countdown} seconds left`
+    messageEl.textContent = `You have ${countdown} seconds remaining`
     }
 }
 
 
 
 const stopGame = function () {
-    console.log("countdown finished")
+    clearInterval(intervalID)
+    liveGame = false;
+    gamesPlayed ++
+    numberOfGuesses = 5;
+    theWord = "";
+    blanks = [];
+    lettersGuessed = [];
+    countdown = 60;
+    intervalID = null
+    matches = 0;
+    gamesPlayedEl.textContent = `Games Played: ${gamesPlayed}`
+    countdownEl.textContent = `${countdown} seconds left`
+    lettersGuessedEl.textContent = lettersGuessed
+    guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
+    winCountEl.textContent = `You have won: ${winCount}`;
+    loseCountEl.textContent = `You have lost: ${lossCount}`;
+    
 }
-
+const youWin = function(){
+    messageEl.textContent = "you win"
+    winCount ++
+    stopGame()
+}
     
     
     

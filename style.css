@@ -77,11 +77,11 @@ body {
 }
 
 
-#bottomRow {
+#messageBox {
     border: 1pt solid white;
     display: flex;
     justify-content: center;
-    background-color: rgba(255, 255, 0, 0.9);
+    background-color: rgba(0, 255, 0, 0.9);
 }
 #message {
     font-size: 2rem;
