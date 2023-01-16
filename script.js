@@ -24,6 +24,8 @@ const guessesRemainingEl = document.querySelector('#guessesRemaining');
 const countdownEl = document.querySelector('#countdown');
 const lettersGuessedEl = document.querySelector('#lettersGuessed');
 const theWordEl = document.querySelector('#theWord');
+const messageEl = document.querySelector("#message")
+
 
 // Variables that will change
 let liveGame = false;
@@ -34,10 +36,17 @@ let numberOfGuesses = 5;
 let theWord = "";
 let blanks = [];
 let lettersGuessed = [];
+let countdown = 60;
+let intervalID = null
 
 // events
 newGameBtn.addEventListener("click", function (){
     liveGame = true;
+    messageEl.style.color = "red"
+
+    // start timer
+    intervalID = window.setInterval(timer, 100)
+
     // generate random word
     let word = generateRandomWord()
     console.log(word)
@@ -81,6 +90,7 @@ window.addEventListener("keydown", function (e) {
     }
 })
 
+// checks if letter is in the word
 const checkWord = function (letter) {
 
     // If letter is not included in word
@@ -100,3 +110,26 @@ const checkWord = function (letter) {
         theWordEl.textContent = blanks.join(" ")
     }
 }
+
+// create a function for countdown
+
+
+const timer = function () {
+    if (countdown <= 0) {
+        clearInterval(intervalID)
+        stopGame()
+    } else {
+    countdown --
+    countdownEl.textContent = `${countdown} seconds left`
+    }
+}
+
+
+
+const stopGame = function () {
+    console.log("countdown finished")
+}
+
+    
+    
+    

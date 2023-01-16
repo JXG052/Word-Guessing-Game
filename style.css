@@ -76,10 +76,19 @@ body {
     transition: 0.2sgit;
 }
 
-#message {
-    color: white;
-    font-size: 2rem;
+
+#bottomRow {
+    border: 1pt solid white;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 0, 0.9);
 }
+#message {
+    font-size: 2rem;
+    color: black
+}
+
+
 
 
 
