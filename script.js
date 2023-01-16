@@ -31,7 +31,9 @@ let gamesPlayed = 0;
 let winCount = 0;
 let lossCount = 0;
 let numberOfGuesses = 5;
-let theWord = ""
+let theWord = "";
+let blanks = [];
+let lettersGuessed = [];
 
 // events
 newGameBtn.addEventListener("click", function (){
@@ -41,17 +43,19 @@ newGameBtn.addEventListener("click", function (){
     console.log(word)
     theWord = word.split("")
     let n = theWord.length
-    let blanks = ""
+    
     
     // display word as blanks
     for (let i = 0; i < n; i++){
-    blanks += " _";
+    blanks.push("_");
     }
-    theWordEl.textContent = blanks;
     
-    // listen for key
+    theWordEl.textContent = blanks.join(" ");
+    
+    
 
 })
+
 // Returns a random word
 const generateRandomWord = function () {
     let randomIndex = Math.floor(Math.random()*wordsArray.length)
@@ -77,15 +81,22 @@ window.addEventListener("keydown", function (e) {
     }
 })
 
-
-
 const checkWord = function (letter) {
+
+    // If letter is not included in word
     if(!theWord.includes(letter)){
         console.log(`Sorry, ${letter} is not in the word`)
         numberOfGuesses --
         guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
+        lettersGuessed.push(letter);
+        lettersGuessedEl.textContent = lettersGuessed
+
     }
     else{
-        console.log('letter is in theWord')
+
+        // What happens when the letter is in theWord
+        let index = theWord.indexOf(letter);
+        blanks[index] = letter;
+        theWordEl.textContent = blanks.join(" ")
     }
 }
