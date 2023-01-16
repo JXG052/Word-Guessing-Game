@@ -34,9 +34,17 @@ let numberOfGuesses = 5;
 
 // events
 newGameBtn.addEventListener("click", function (){
-    theWord.textContent = generateRandomWord()
+    let wordSplit = generateRandomWord()
+    console.log(wordSplit)
+    let word = wordSplit.split("")
+    let n = word.length
+    let blanks = ""
+    // print n number of _
+    for (let i = 0; i < n; i++){
+    blanks += " _";
+    }
+    theWord.textContent = blanks;
 })
-
 // Returns a random word
 const generateRandomWord = function () {
     let randomIndex = Math.floor(Math.random()*wordsArray.length)

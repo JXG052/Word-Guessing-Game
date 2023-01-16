@@ -12,7 +12,7 @@
 1. Create Start Game Button
     * event listener that triggers a new word
 1. Create function that generates a random word
-    * output changes to new word and blanks
+    * output changes to new word and blanks. Function - change to blanks 
 1. if user input (key stroke event?)
     * if correct letter, fill out blanks
         
@@ -67,4 +67,7 @@ HTML and Basic CSS to look something like the following:
 * blanks or letters depending on where we are up to in the game
 * win count
 * loss count
-    
+
+## Functions
+
+const turnToBlank = function (letter)
