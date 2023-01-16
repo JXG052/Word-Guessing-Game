@@ -34,16 +34,38 @@ let numberOfGuesses = 5;
 
 // events
 newGameBtn.addEventListener("click", function (){
-    let wordSplit = generateRandomWord()
-    console.log(wordSplit)
-    let word = wordSplit.split("")
-    let n = word.length
+    // generate random word
+    let word = generateRandomWord()
+    console.log(word)
+    let wordSplit = word.split("")
+    let n = wordSplit.length
     let blanks = ""
-    // print n number of _
+    
+    // display word as blanks
     for (let i = 0; i < n; i++){
     blanks += " _";
     }
     theWord.textContent = blanks;
+    
+    // listen for key
+    window.addEventListener("keydown", function (e) {
+        console.log(`e.key is: ${e.key}`)
+        let letter = e.key.toUpperCase()
+        let regex = /[A-Z]/;
+        let found = letter.match(regex)
+         if (!found || e.key.length > 1) {
+            alert("please enter an alphabetical character")
+        }
+        else {
+            let confirmed = confirm(`You entered ${letter}, are you sure?`)
+            if (!confirmed){
+                alert("No problem, we all make mistakes, please enter another character")
+            } else {
+                console.log(letter)
+            }
+        }
+        
+})
 })
 // Returns a random word
 const generateRandomWord = function () {
@@ -51,3 +73,4 @@ const generateRandomWord = function () {
     return wordsArray[randomIndex]
 }
 
+// Event listener for keydown
