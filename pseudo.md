@@ -15,7 +15,7 @@
     * use length of that word to print that many blanks as a string
     * output changes to new word and blanks. Function - change to blanks 
 1. if user input (key stroke event?)
-    * how does user input key? keydown 
+    * keydown logs the key and validates for character
     * if correct letter, fill out blanks
         
     * else, numberOfGuesses -1
