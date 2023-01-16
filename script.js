@@ -26,6 +26,7 @@ const lettersGuessedEl = document.querySelector('#lettersGuessed');
 const theWordEl = document.querySelector('#theWord');
 const messageEl = document.querySelector("#message")
 const messageBoxEl = document.querySelector("#messageBox")
+const stopBtn = document.getElementById("stopBtn");
 
 
 // Variables that will change
@@ -44,7 +45,9 @@ let matches = 0;
 // events
 newGameBtn.addEventListener("click", function (){
     liveGame = true;
-    messageBoxEl.style.backgroundColor = "Yellow"
+    stopBtn.style.display = "inline";
+    newGameBtn.style.display = "none";
+    messageBoxEl.style.display = "none";
 
     // start timer
     intervalID = window.setInterval(timer, 1000)
@@ -104,7 +107,8 @@ const checkWord = function (letter) {
         lettersGuessedEl.textContent = lettersGuessed
         if (numberOfGuesses === 0){
             lossCount ++
-            messageEl.textContent  ="you ran out of guesses"
+            messageBoxEl.style.backgroundColor = "red";
+            messageEl.textContent  ="You LOSE!!! you ran out of guesses"
             stopGame()
         }
     }
@@ -117,8 +121,10 @@ const checkWord = function (letter) {
         matches ++;
         console.log(matches)
         if (matches === theWord.length){
+            messageBoxEl.style.backgroundColor = "rgba(0, 255, 0, 0.9)"
+            messageEl.textContent = "Woohoo you win!!!"
+            winCount ++
             stopGame()
-            youWin()
         }
     }
 }
@@ -130,7 +136,7 @@ const timer = function () {
     if (countdown <= 0) {
         messageBoxEl.style.backgroundColor = "red"
         messageEl.textContent = "TIME UP!"
-        lossCount--
+        lossCount++
         stopGame()
     } else {
     countdown --
@@ -158,7 +164,8 @@ const stopGame = function () {
     guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
     winCountEl.textContent = `You have won: ${winCount}`;
     loseCountEl.textContent = `You have lost: ${lossCount}`;
-    
+    stopGame.style.display = "none";
+    newGameBtn.style.display = "inline";
 }
 const youWin = function(){
     messageEl.textContent = "you win"

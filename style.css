@@ -75,6 +75,14 @@ body {
     background-color: black;
     transition: 0.2sgit;
 }
+#stopBtn {
+    border-radius: 15px;
+    font-size: 2rem;
+    background-color: red;
+    color: white;
+    box-shadow: 0 0 3px;
+    display: none;
+}
 
 
 #messageBox {
