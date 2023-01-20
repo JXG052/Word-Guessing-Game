@@ -1,32 +1,43 @@
 let  wordsArray = [
     {
+        level: 1,
         word: "HELLO",
         clue: "English Greeting"
     },
     {
+        level: 2,
+        word: "BOOK", 
+        clue: "read one!"
+    },
+    {
+        level: 3,
         word:"BURGER", 
         clue: "Eat it from a bun"
     },
     {
-        word: "PHOTOSYNTEHSIS", 
-        clue: "Plants do it"
-    },
-    {
+        level: 4,
         word:"FOOTBALL", 
         clue: "Messi is quite good at it"
     },
     {
-        word: "RELIGION", 
-        clue: "Muslim, Christianity, Judaism ..."
-    },
-    {
-        word: "POLICE",
-        clue: "fuck da ____!"
+        level: 5,
+        word: "HOSPITAL",
+        clue: "Go here if you're ill"
     }, 
     {
-        word: "BOOK", 
-        clue: "read one!"
-    }
+        level: 6,
+        word: "RELIGIONS", 
+        clue: "Muslim, Christianity, Judaism are types of ..."
+    },
+    {
+        level: 7,
+        word: "PHOTOSYNTEHSIS", 
+        clue: "Plants do it"
+    },
+
+
+
+
 ]
 console.log(wordsArray[1].word)
 // DOM variables
@@ -60,9 +71,10 @@ let matches = 0;
 let cluesRemaining = 3;
 let clue;
 
-// New Game Function
+
 // New Game Function
 function newGame (){
+    messageBoxEl.style.backgroundColor = "rgba(255, 255, 255, 0.9)"
     liveGame = true;
     stopBtn.style.display = "inline";
     newGameBtn.style.display = "none";
@@ -73,10 +85,14 @@ function newGame (){
         
         levelCountEl.textContent = `Level ${levelCount}` 
     }
+    else {
+        // start timer
+        intervalID = window.setInterval(timer, 1000)
+    }
+
 
     
-    // start timer
-    intervalID = window.setInterval(timer, 1000)
+
 
     // generate random word
     let word = generateRandomWord()
@@ -99,12 +115,16 @@ function newGame (){
 // events
 newGameBtn.addEventListener("click", newGame )
 nextLevelBtn.addEventListener("click", newGame )
+stopBtn.addEventListener("click", resetGame )
+
 
 // Returns a random word
 const generateRandomWord = function () {
-    let randomIndex = Math.floor(Math.random()*wordsArray.length)
-    clue = wordsArray[randomIndex].clue;
-    return wordsArray[randomIndex].word;
+    // let randomIndex = Math.floor(Math.random()*wordsArray.length)
+    // clue = wordsArray[randomIndex].clue;
+    // return wordsArray[randomIndex].word;
+    clue = wordsArray[levelCount - 1].clue;
+    return wordsArray[levelCount - 1].word;
 }
 
 // Event listener for keydown. logs that letter and runs checkword function
@@ -176,19 +196,11 @@ const checkWord = function (letter) {
     lettersGuessedEl.textContent = lettersGuessed
 }
 
-
-
-
-
-
-// create a function for countdown
-
-
+// Timer
 const timer = function () {
     if (countdown <= 0) {
         messageBoxEl.style.backgroundColor = "red"
         messageEl.textContent = "TIME UP!"
-        lossCount++
         liveGame = false;
         stopGame()
     } else {
@@ -200,28 +212,40 @@ const timer = function () {
 
 
 const stopGame = function () {
-    clearInterval(intervalID)
+    
 
     // reset per game variables
     theWord = "";
     blanks = [];
     lettersGuessed = [];
-    countdown = 60;
-    intervalID = null
+    
+    
     matches = 0;
 
 
     // If user won - load next level
     if (liveGame){
+        if(levelCount === wordsArray.length){
+            liveGame = false;
+            messageBoxEl.style.backgroundColor = "green";
+            messageEl.textContent = "Woohoo you win"
+            stopGame()
+        }
+        else {
         levelCount ++
         stopBtn.style.display = "none";
         nextLevelBtn.style.display = "inline"
+        }
     }
     // If user lost - reset to level one
     else {
+        clearInterval(intervalID)
+        countdown = 60;
+        levelCount = 1;
         levelCountEl.textContent = ` Level: 1`
         numberOfGuesses = 5;
         newGameBtn.style.display = "inline";
+        stopBtn.style.display = "none";
     }
 
     
@@ -235,6 +259,14 @@ const stopGame = function () {
     
 }
 
+function resetGame() {
+    
+    liveGame = false;
+    messageEl.textContent = "CLICK THE NEW GAME BUTTON TO START";
+    nextLevelBtn.style.display = "none";
+    stopGame()
+
+}
 
 
 const youWin = function(){

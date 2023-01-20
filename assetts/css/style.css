@@ -67,13 +67,13 @@ body {
     border-radius: 15px;
     font-size: 2rem;
     background-color: white;
-    color: black;
+    color: green;
     box-shadow: 0 0 3px;
 }
 #newGameBtn:hover {
     color: white;
-    background-color: black;
-    transition: 0.2sgit;
+    background-color: green;
+    transition: 0.2s;
 }
 #nextLevelBtn{
     border-radius: 15px;
@@ -84,14 +84,25 @@ body {
     display: none;
     margin-right: 5px;
 }
+#nextLevelBtn:hover {
+    color: green;
+    background-color: white;
+    transition: 0.2s;
+}
 
 #stopBtn {
     border-radius: 15px;
     font-size: 2rem;
-    background-color: red;
-    color: white;
+    background-color: white;
+    color: red;
     box-shadow: 0 0 3px;
     display: none;
+}
+
+#stopBtn:hover {
+    background-color: red;
+    color: white;
+    transition: 0.2s;
 }
 
 
