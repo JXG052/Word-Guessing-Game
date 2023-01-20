@@ -33,7 +33,7 @@ console.log(wordsArray[1].word)
 
 const newGameBtn = document.getElementById("newGameBtn");
 const gamesPlayedEl = document.querySelector("#gamesPlayed");
-const winCountEl = document.querySelector("#winCount");
+const levelCountEl = document.querySelector("#winCount");
 const loseCountEl = document.querySelector('#loseCount');
 const guessesRemainingEl = document.querySelector('#guessesRemaining');
 const countdownEl = document.querySelector('#countdown');
@@ -43,13 +43,13 @@ const messageEl = document.querySelector("#message")
 const messageBoxEl = document.querySelector("#messageBox")
 const stopBtn = document.getElementById("stopBtn");
 const clueBtn = document.getElementById("clueBtn");
+const nextLevelBtn = document.getElementById("nextLevelBtn")
 
 
 // Variables that will change
 let liveGame = false;
 let gamesPlayed = 0;
-let winCount = 0;
-let lossCount = 0;
+let levelCount = 1;
 let numberOfGuesses = 5;
 let theWord = "";
 let blanks = [];
@@ -59,15 +59,22 @@ let intervalID = null
 let matches = 0;
 let cluesRemaining = 3;
 let clue;
-// events
-newGameBtn.addEventListener("click", function (){
-    window.focus();
+
+// New Game Function
+// New Game Function
+function newGame (){
     liveGame = true;
     stopBtn.style.display = "inline";
     newGameBtn.style.display = "none";
-    messageBoxEl.style.display= "flex";
+    nextLevelBtn.style.display = "none"
     
 
+    if (levelCount > 1) {
+        
+        levelCountEl.textContent = `Level ${levelCount}` 
+    }
+
+    
     // start timer
     intervalID = window.setInterval(timer, 1000)
 
@@ -86,8 +93,12 @@ newGameBtn.addEventListener("click", function (){
     theWordEl.textContent = blanks.join(" ");
     messageEl.textContent = clue
     
+}
 
-})
+
+// events
+newGameBtn.addEventListener("click", newGame )
+nextLevelBtn.addEventListener("click", newGame )
 
 // Returns a random word
 const generateRandomWord = function () {
@@ -99,8 +110,7 @@ const generateRandomWord = function () {
 // Event listener for keydown. logs that letter and runs checkword function
 window.addEventListener("keydown", function (e) {
     if(!liveGame){
-        messageBoxEl.style.display = "flex";
-        messageEl.textContent = "Don't forget to click new game"
+        return;
     }
     else{
         let letter = e.key.toUpperCase()
@@ -108,7 +118,7 @@ window.addEventListener("keydown", function (e) {
         let found = letter.match(regex)
          if (!found || e.key.length > 1) {
             console.log("please enter an alphabetical character")
-        }
+        }   
         else {
             checkWord(letter)
         }
@@ -126,13 +136,16 @@ const checkWord = function (letter) {
         guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
         lettersGuessed.push(letter);
         
+        // if they run out of guesses
         if (numberOfGuesses === 0){
-            lossCount ++
             messageBoxEl.style.backgroundColor = "red";
             messageEl.textContent  ="You LOSE!!! you ran out of guesses"
+            liveGame = false;
             stopGame()
         }
     }
+
+
     else if (lettersGuessed.includes(letter))
         console.log("you've already entered that letter")
     else {
@@ -153,17 +166,20 @@ const checkWord = function (letter) {
         theWordEl.textContent = blanks.join(" ")
 
 
-
+        // if the user gets it right
         if (matches === theWord.length){
-            messageBoxEl.style.backgroundColor = "rgba(0, 255, 0, 0.9)"
-            messageEl.textContent = "Woohoo you win!!!"
-
-            winCount ++
+            messageEl.textContent = "Correct!!!"
+            liveGame = true; 
             stopGame()
         }
     }
     lettersGuessedEl.textContent = lettersGuessed
 }
+
+
+
+
+
 
 // create a function for countdown
 
@@ -173,6 +189,7 @@ const timer = function () {
         messageBoxEl.style.backgroundColor = "red"
         messageEl.textContent = "TIME UP!"
         lossCount++
+        liveGame = false;
         stopGame()
     } else {
     countdown --
@@ -184,35 +201,47 @@ const timer = function () {
 
 const stopGame = function () {
     clearInterval(intervalID)
-    liveGame = false;
-    gamesPlayed ++
-    numberOfGuesses = 5;
+
+    // reset per game variables
     theWord = "";
     blanks = [];
     lettersGuessed = [];
     countdown = 60;
     intervalID = null
     matches = 0;
-    gamesPlayedEl.textContent = `Games Played: ${gamesPlayed}`
+
+
+    // If user won - load next level
+    if (liveGame){
+        levelCount ++
+        stopBtn.style.display = "none";
+        nextLevelBtn.style.display = "inline"
+    }
+    // If user lost - reset to level one
+    else {
+        levelCountEl.textContent = ` Level: 1`
+        numberOfGuesses = 5;
+        newGameBtn.style.display = "inline";
+    }
+
+    
+    
+    
+    
+
     countdownEl.textContent = `${countdown} seconds left`
     lettersGuessedEl.textContent = lettersGuessed
     guessesRemainingEl.textContent = `${numberOfGuesses} guesses left`
-    winCountEl.textContent = `You have won: ${winCount}`;
-    loseCountEl.textContent = `You have lost: ${lossCount}`;
-    stopBtn.style.display = "none";
-    newGameBtn.style.display = "inline";
+    
 }
+
+
+
 const youWin = function(){
-    messageEl.textContent = "you win"
-    winCount ++
+    messageEl.textContent = "Congrats!"
+    levelCount ++
     stopGame()
 }
 
-const revealClue = function(){
-    messageBoxEl.style.display = "flex";
-    messageEl.textContent = clue;
-    cluesRemaining --
-
-}
     
     

@@ -1,7 +1,7 @@
 /* Global Styling */
 body {
     height: 100vh;
-    background: url(images/background.jpg) no-repeat center center/cover;
+    background: url(../images/background.jpg) no-repeat center center/cover;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
@@ -75,10 +75,10 @@ body {
     background-color: black;
     transition: 0.2sgit;
 }
-#clueBtn{
+#nextLevelBtn{
     border-radius: 15px;
     font-size: 2rem;
-    background-color: orange;
+    background-color: green;
     color: white;
     box-shadow: 0 0 3px;
     display: none;
@@ -95,11 +95,15 @@ body {
 }
 
 
+
 #messageBox {
-    border: 1pt solid white;
-    display: none;
+    border: 3pt solid black;
+    display: flex;
     justify-content: center;
-    background-color: rgba(0, 255, 0, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    margin: 0 auto;
+
 }
 #message {
     font-size: 2rem;
